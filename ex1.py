@@ -12,35 +12,16 @@ def grad(X, theta, y, m) :
 	dJ = X.T * (hypothesis(X, theta) - y) / m;
 	return dJ;
 
-csvfile = file('save_train.csv', 'rb');
-reader = csv.DictReader(csvfile);
+csv = numpy.genfromtxt('save_train.csv', delimiter = ',');
+row, col = csv.shape;
+X = csv[1:, :-1];
+y = csv[1:, -1:];
 
-vectors = [];
-y = [];
-theta = [];
-for line in reader :
-	vector = [1];
-	for num in range(0, 384) :
-		vector.append(float(line['value' + str(num)]));
-	vector = numpy.array(vector);
-	vectors.append(vector);
-	y.append(float(line['reference']));
-for n in range(0, 385):
-	theta.append(0);
+m = row - 1;
 
-csvfile.close();
+theta = numpy.mat(numpy.zeros((col - 1, 1)));
 
-X = numpy.mat(vectors);
-m = len(y);
-theta = numpy.mat(numpy.array(theta));
-theta = theta.T;
-y = numpy.mat(numpy.array(y));
-y = y.T
-# print((X * theta).shape);
-# print(costFunction(X, theta, y, m));
-# print(grad(X, theta, y, m));
-
-alpha = 0.05;
+alpha = 0.00001;
 max_iterate = 10000;
 
 for i in range(0, max_iterate) :
