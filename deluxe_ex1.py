@@ -47,7 +47,7 @@ y = y.T
 # print(costFunction(X, theta, y, m));
 # print(grad(X, theta, y, m));
 
-alpha = 0.05; #it used to be .05
+alpha = 0.05;
 max_iterate = 3000;
 lda = 0.5;
 
